@@ -8,7 +8,8 @@ const annonceSchema = new mongoose.Schema(
     country: { type: String, required: true, trim: true },
     startDate: { type: Date },
     endDate: { type: Date },
-    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
+    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    status: { type: String, enum: ["active", "paused"], default: "active" }
   },
   { timestamps: true }
 );
