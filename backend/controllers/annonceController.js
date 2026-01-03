@@ -14,10 +14,10 @@ async function createAnnonce(req, res) {
     }
 
     const annonce = await Annonce.create({
-      title: title.trim(),
-      description: description.trim(),
-      city: city.trim(),
-      country: country.trim(),
+      title: String(title).trim(),
+      description: String(description).trim(),
+      city: String(city).trim(),
+      country: String(country).trim(),
       startDate: startDate || undefined,
       endDate: endDate || undefined,
       createdBy: createdBy || undefined
@@ -32,6 +32,31 @@ async function createAnnonce(req, res) {
 async function listAnnonces(req, res) {
   try {
     const annonces = await Annonce.find().sort({ createdAt: -1 });
+    return res.status(200).json({ annonces });
+  } catch {
+    return res.status(500).json({ message: "Erreur serveur" });
+  }
+}
+
+async function searchHotes(req, res) {
+  try {
+    const { q, city, country } = req.query;
+
+    const filter = { status: "active" };
+
+    if (city) filter.city = new RegExp(String(city).trim(), "i");
+    if (country) filter.country = new RegExp(String(country).trim(), "i");
+
+    if (q && String(q).trim().length > 0) {
+      const term = String(q).trim();
+      filter.$or = [
+        { title: new RegExp(term, "i") },
+        { description: new RegExp(term, "i") }
+      ];
+    }
+
+    const annonces = await Annonce.find(filter).sort({ createdAt: -1 });
+
     return res.status(200).json({ annonces });
   } catch {
     return res.status(500).json({ message: "Erreur serveur" });
@@ -116,6 +141,7 @@ async function pauseAnnonce(req, res) {
 module.exports = {
   createAnnonce,
   listAnnonces,
+  searchHotes,
   updateAnnonce,
   deleteAnnonce,
   pauseAnnonce

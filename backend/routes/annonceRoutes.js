@@ -2,6 +2,7 @@ const express = require("express");
 const {
   createAnnonce,
   listAnnonces,
+  searchHotes,
   updateAnnonce,
   deleteAnnonce,
   pauseAnnonce
@@ -9,8 +10,9 @@ const {
 
 const router = express.Router();
 
-router.post("/", createAnnonce);
 router.get("/", listAnnonces);
+router.get("/search", searchHotes);
+router.post("/", createAnnonce);
 
 router.put("/:id", updateAnnonce);
 router.delete("/:id", deleteAnnonce);
