@@ -56,4 +56,35 @@ async function listCandidaturesByAnnonce(req, res) {
   }
 }
 
-module.exports = { applyToAnnonce, listCandidaturesByAnnonce };
+async function listDemandesRecues(req, res) {
+  try {
+    const { annonceId } = req.params;
+    const { hostId } = req.query;
+
+    if (!annonceId || !hostId) {
+      return res.status(400).json({ message: "Champs manquants" });
+    }
+
+    if (!isValidObjectId(annonceId) || !isValidObjectId(hostId)) {
+      return res.status(400).json({ message: "Id invalide" });
+    }
+
+    const annonce = await Annonce.findById(annonceId);
+    if (!annonce) {
+      return res.status(404).json({ message: "Annonce introuvable" });
+    }
+
+    const createdBy = annonce.createdBy ? annonce.createdBy.toString() : null;
+    if (!createdBy || createdBy !== hostId) {
+      return res.status(403).json({ message: "Accès refusé" });
+    }
+
+    const candidatures = await Candidature.find({ annonceId }).sort({ createdAt: -1 });
+
+    return res.status(200).json({ candidatures });
+  } catch {
+    return res.status(500).json({ message: "Erreur serveur" });
+  }
+}
+
+module.exports = { applyToAnnonce, listCandidaturesByAnnonce, listDemandesRecues };
