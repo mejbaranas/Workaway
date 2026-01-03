@@ -49,15 +49,32 @@ async function searchHotes(req, res) {
 
     if (q && String(q).trim().length > 0) {
       const term = String(q).trim();
-      filter.$or = [
-        { title: new RegExp(term, "i") },
-        { description: new RegExp(term, "i") }
-      ];
+      filter.$or = [{ title: new RegExp(term, "i") }, { description: new RegExp(term, "i") }];
     }
 
     const annonces = await Annonce.find(filter).sort({ createdAt: -1 });
 
     return res.status(200).json({ annonces });
+  } catch {
+    return res.status(500).json({ message: "Erreur serveur" });
+  }
+}
+
+async function getAnnonceById(req, res) {
+  try {
+    const { id } = req.params;
+
+    if (!isValidObjectId(id)) {
+      return res.status(400).json({ message: "Id invalide" });
+    }
+
+    const annonce = await Annonce.findById(id);
+
+    if (!annonce) {
+      return res.status(404).json({ message: "Annonce introuvable" });
+    }
+
+    return res.status(200).json({ annonce });
   } catch {
     return res.status(500).json({ message: "Erreur serveur" });
   }
@@ -142,6 +159,7 @@ module.exports = {
   createAnnonce,
   listAnnonces,
   searchHotes,
+  getAnnonceById,
   updateAnnonce,
   deleteAnnonce,
   pauseAnnonce
