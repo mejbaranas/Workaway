@@ -1,0 +1,214 @@
+.formulaire-avis {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.formulaire-avis h3 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.avis-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.avis-success {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.formulaire-avis .form-group {
+  margin-bottom: 15px;
+}
+
+.formulaire-avis label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #333;
+}
+
+.stars-input {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.star {
+  font-size: 28px;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.star:hover {
+  transform: scale(1.2);
+}
+
+.star-filled {
+  color: #f1c40f;
+}
+
+.star-empty {
+  color: #ddd;
+}
+
+.note-value {
+  margin-left: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+.formulaire-avis textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.formulaire-avis textarea:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.btn-submit-avis {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+}
+
+.btn-submit-avis:hover {
+  background-color: #2980b9;
+}
+
+.btn-submit-avis:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+/* Profil Avis */
+.profil-avis {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.profil-avis h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.profil-avis-loading,
+.avis-empty {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.avis-stats {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.stats-moyenne {
+  font-size: 36px;
+  font-weight: bold;
+  color: #333;
+}
+
+.moyenne-max {
+  font-size: 18px;
+  color: #666;
+}
+
+.stats-stars .star-filled,
+.stats-stars .star-empty {
+  font-size: 24px;
+}
+
+.stats-total {
+  color: #666;
+  font-size: 14px;
+}
+
+.avis-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.avis-item {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.avis-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.avis-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.author-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #3498db;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.author-name {
+  font-weight: 500;
+  color: #333;
+}
+
+.avis-note .star-filled,
+.avis-note .star-empty {
+  font-size: 16px;
+}
+
+.avis-commentaire {
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.avis-date {
+  font-size: 12px;
+  color: #999;
+}
