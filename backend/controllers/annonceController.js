@@ -155,6 +155,143 @@ async function pauseAnnonce(req, res) {
   }
 }
 
+async function getCalendrier(req, res) {
+  try {
+    const { id } = req.params;
+
+    if (!isValidObjectId(id)) {
+      return res.status(400).json({ message: "Id invalide" });
+    }
+
+    const annonce = await Annonce.findById(id).select("disponibilites title");
+
+    if (!annonce) {
+      return res.status(404).json({ message: "Annonce introuvable" });
+    }
+
+    return res.status(200).json({ 
+      title: annonce.title,
+      disponibilites: annonce.disponibilites || [] 
+    });
+  } catch {
+    return res.status(500).json({ message: "Erreur serveur" });
+  }
+}
+
+async function addDisponibilite(req, res) {
+  try {
+    const { id } = req.params;
+    const { startDate, endDate, type } = req.body;
+
+    if (!isValidObjectId(id)) {
+      return res.status(400).json({ message: "Id invalide" });
+    }
+
+    if (!startDate || !endDate) {
+      return res.status(400).json({ message: "Dates requises" });
+    }
+
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    if (start >= end) {
+      return res.status(400).json({ message: "La date de fin doit être après la date de début" });
+    }
+
+    const annonce = await Annonce.findById(id);
+
+    if (!annonce) {
+      return res.status(404).json({ message: "Annonce introuvable" });
+    }
+
+    const newDisponibilite = {
+      startDate: start,
+      endDate: end,
+      type: type || "available"
+    };
+
+    annonce.disponibilites.push(newDisponibilite);
+    await annonce.save();
+
+    return res.status(201).json({ 
+      message: type === "blocked" ? "Dates bloquées" : "Disponibilité ajoutée",
+      disponibilites: annonce.disponibilites 
+    });
+  } catch {
+    return res.status(500).json({ message: "Erreur serveur" });
+  }
+}
+
+async function removeDisponibilite(req, res) {
+  try {
+    const { id, dispoId } = req.params;
+
+    if (!isValidObjectId(id) || !isValidObjectId(dispoId)) {
+      return res.status(400).json({ message: "Id invalide" });
+    }
+
+    const annonce = await Annonce.findById(id);
+
+    if (!annonce) {
+      return res.status(404).json({ message: "Annonce introuvable" });
+    }
+
+    const dispoIndex = annonce.disponibilites.findIndex(
+      (d) => d._id.toString() === dispoId
+    );
+
+    if (dispoIndex === -1) {
+      return res.status(404).json({ message: "Disponibilité introuvable" });
+    }
+
+    annonce.disponibilites.splice(dispoIndex, 1);
+    await annonce.save();
+
+    return res.status(200).json({ 
+      message: "Disponibilité supprimée",
+      disponibilites: annonce.disponibilites 
+    });
+  } catch {
+    return res.status(500).json({ message: "Erreur serveur" });
+  }
+}
+
+async function updateDisponibilite(req, res) {
+  try {
+    const { id, dispoId } = req.params;
+    const { startDate, endDate, type } = req.body;
+
+    if (!isValidObjectId(id) || !isValidObjectId(dispoId)) {
+      return res.status(400).json({ message: "Id invalide" });
+    }
+
+    const annonce = await Annonce.findById(id);
+
+    if (!annonce) {
+      return res.status(404).json({ message: "Annonce introuvable" });
+    }
+
+    const dispo = annonce.disponibilites.id(dispoId);
+
+    if (!dispo) {
+      return res.status(404).json({ message: "Disponibilité introuvable" });
+    }
+
+    if (startDate) dispo.startDate = new Date(startDate);
+    if (endDate) dispo.endDate = new Date(endDate);
+    if (type) dispo.type = type;
+
+    await annonce.save();
+
+    return res.status(200).json({ 
+      message: "Disponibilité modifiée",
+      disponibilites: annonce.disponibilites 
+    });
+  } catch {
+    return res.status(500).json({ message: "Erreur serveur" });
+  }
+}
+
 module.exports = {
   createAnnonce,
   listAnnonces,
@@ -162,5 +299,9 @@ module.exports = {
   getAnnonceById,
   updateAnnonce,
   deleteAnnonce,
-  pauseAnnonce
+  pauseAnnonce,
+  getCalendrier,
+  addDisponibilite,
+  removeDisponibilite,
+  updateDisponibilite
 };
