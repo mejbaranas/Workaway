@@ -5,7 +5,8 @@ const candidatureSchema = new mongoose.Schema(
     annonceId: { type: mongoose.Schema.Types.ObjectId, ref: "Annonce", required: true },
     applicantId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     message: { type: String, required: true, trim: true, minlength: 5 },
-    status: { type: String, enum: ["pending", "accepted", "rejected"], default: "pending" }
+    status: { type: String, enum: ["pending", "accepted", "rejected"], default: "pending" },
+    hostResponse: { type: String, trim: true, default: "" }
   },
   { timestamps: true }
 );
