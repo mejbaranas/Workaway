@@ -1,5 +1,7 @@
 import Inbox from "./components/Inbox";
 import "./components/Inbox.css";
+import MesCandidatures from "./components/MesCandidatures";
+import "./components/MesCandidatures.css";
 
 function App() {
   // ID utilisateur temporaire pour test (à remplacer par l'utilisateur connecté)
@@ -8,6 +10,8 @@ function App() {
   return (
     <div className="app">
       <h1>WorkAway</h1>
+      <MesCandidatures userId={userId} />
+      <hr style={{ margin: "40px 0" }} />
       <Inbox userId={userId} />
     </div>
   );
