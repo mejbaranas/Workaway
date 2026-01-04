@@ -34,6 +34,26 @@ io.on("connection", (socket) => {
     console.log("User joined room:", userId);
   });
 
+  socket.on("markAsRead", (data) => {
+    // Notifier l'expediteur que le message a ete lu
+    if (data.senderId) {
+      io.to(data.senderId).emit("messageRead", {
+        messageId: data.messageId,
+        readBy: data.readBy
+      });
+    }
+  });
+
+  socket.on("typing", (data) => {
+    // Notifier que l'utilisateur tape un message
+    if (data.receiverId) {
+      io.to(data.receiverId).emit("userTyping", {
+        senderId: data.senderId,
+        isTyping: data.isTyping
+      });
+    }
+  });
+
   socket.on("disconnect", () => {
     console.log("User disconnected:", socket.id);
   });

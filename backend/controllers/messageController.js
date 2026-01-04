@@ -129,9 +129,49 @@ async function markAsRead(req, res) {
   }
 }
 
+async function getUnreadCount(req, res) {
+  try {
+    const { userId } = req.params;
+
+    if (!isValidObjectId(userId)) {
+      return res.status(400).json({ message: "Id invalide" });
+    }
+
+    const count = await Message.countDocuments({
+      receiver: userId,
+      read: false
+    });
+
+    return res.status(200).json({ count });
+  } catch {
+    return res.status(500).json({ message: "Erreur serveur" });
+  }
+}
+
+async function markConversationAsRead(req, res) {
+  try {
+    const { senderId, receiverId } = req.params;
+
+    if (!isValidObjectId(senderId) || !isValidObjectId(receiverId)) {
+      return res.status(400).json({ message: "Id invalide" });
+    }
+
+    await Message.updateMany(
+      { sender: senderId, receiver: receiverId, read: false },
+      { read: true }
+    );
+
+    return res.status(200).json({ message: "Messages marqués comme lus" });
+  } catch {
+    return res.status(500).json({ message: "Erreur serveur" });
+  }
+}
+
 module.exports = {
   sendMessage,
   getConversation,
   getUserConversations,
-  markAsRead
+  markAsRead,
+  getUnreadCount,
+  markConversationAsRead
 };
