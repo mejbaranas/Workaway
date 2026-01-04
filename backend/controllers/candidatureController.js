@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Candidature = require("../models/Candidature");
 const Annonce = require("../models/Annonce");
+const User = require("../models/User");
+const { sendCandidatureAcceptee, sendCandidatureRefusee, sendNouvelleCandidature } = require("../services/emailService");
 
 function isValidObjectId(id) {
   return mongoose.Types.ObjectId.isValid(id);
@@ -33,6 +35,17 @@ async function applyToAnnonce(req, res) {
       applicantId,
       message: String(message).trim()
     });
+
+    // Envoyer email de notification a l'hote
+    const host = await User.findById(annonce.createdBy);
+    const applicant = await User.findById(applicantId);
+    if (host && host.email && applicant) {
+      sendNouvelleCandidature(host.email, {
+        hostName: host.firstName,
+        annonceTitle: annonce.title,
+        applicantName: `${applicant.firstName} ${applicant.lastName}`
+      });
+    }
 
     return res.status(201).json({ message: "Candidature envoyée", candidature });
   } catch {
@@ -87,10 +100,34 @@ async function updateCandidatureStatus(req, res) {
       candidatureId,
       updateData,
       { new: true }
-    ).populate("annonceId", "title city country");
+    ).populate("annonceId", "title city country createdBy")
+     .populate("applicantId", "firstName lastName email");
 
     if (!candidature) {
       return res.status(404).json({ message: "Candidature introuvable" });
+    }
+
+    // Envoyer email au candidat selon le statut
+    if (candidature.applicantId && candidature.applicantId.email) {
+      const emailData = {
+        userName: candidature.applicantId.firstName,
+        annonceTitle: candidature.annonceId ? candidature.annonceId.title : "Annonce",
+        hostResponse: hostResponse || ""
+      };
+
+      // Recuperer le nom de l'hote
+      if (candidature.annonceId && candidature.annonceId.createdBy) {
+        const host = await User.findById(candidature.annonceId.createdBy);
+        if (host) {
+          emailData.hostName = `${host.firstName} ${host.lastName}`;
+        }
+      }
+
+      if (status === "accepted") {
+        sendCandidatureAcceptee(candidature.applicantId.email, emailData);
+      } else if (status === "rejected") {
+        sendCandidatureRefusee(candidature.applicantId.email, emailData);
+      }
     }
 
     return res.status(200).json({ message: "Statut mis à jour", candidature });
