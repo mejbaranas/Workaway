@@ -1,5 +1,16 @@
+import Inbox from "./components/Inbox";
+import "./components/Inbox.css";
+
 function App() {
-  return <h1>WorkAway</h1>;
+  // ID utilisateur temporaire pour test (à remplacer par l'utilisateur connecté)
+  const userId = "6959b0ccbd761ab6803b7f1d";
+
+  return (
+    <div className="app">
+      <h1>WorkAway</h1>
+      <Inbox userId={userId} />
+    </div>
+  );
 }
 
 export default App;
