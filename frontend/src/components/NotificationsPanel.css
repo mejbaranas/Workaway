@@ -1,0 +1,221 @@
+.notifications-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Bouton cloche */
+.notifications-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  padding: 8px;
+  font-size: 24px;
+  transition: transform 0.2s;
+}
+
+.notifications-button:hover {
+  transform: scale(1.1);
+}
+
+.bell-icon {
+  display: block;
+}
+
+/* Badge nombre */
+.notifications-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #dc3545;
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 10px;
+  min-width: 18px;
+  text-align: center;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(220, 53, 69, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(220, 53, 69, 0);
+  }
+}
+
+/* Panel notifications */
+.notifications-panel {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 350px;
+  max-height: 450px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  overflow: hidden;
+}
+
+/* Header */
+.notifications-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  background-color: #f8f9fa;
+}
+
+.notifications-header h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.btn-mark-all {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.btn-mark-all:hover {
+  text-decoration: underline;
+}
+
+/* Liste */
+.notifications-list {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.notifications-loading,
+.notifications-empty {
+  text-align: center;
+  padding: 30px;
+  color: #666;
+}
+
+/* Item notification */
+.notification-item {
+  display: flex;
+  padding: 12px 15px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.notification-item:hover {
+  background-color: #f8f9fa;
+}
+
+.notification-item.unread {
+  background-color: #e3f2fd;
+  border-left: 3px solid #007bff;
+}
+
+.notification-item.unread:hover {
+  background-color: #d0e8fc;
+}
+
+/* Icône */
+.notification-icon {
+  font-size: 20px;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+/* Contenu */
+.notification-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.notification-title {
+  margin: 0 0 4px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.notification-message {
+  margin: 0 0 6px 0;
+  font-size: 13px;
+  color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.notification-time {
+  font-size: 11px;
+  color: #999;
+}
+
+/* Bouton supprimer */
+.btn-delete-notif {
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0 5px;
+  align-self: flex-start;
+  transition: color 0.2s;
+}
+
+.btn-delete-notif:hover {
+  color: #dc3545;
+}
+
+/* Footer */
+.notifications-footer {
+  padding: 10px;
+  border-top: 1px solid #eee;
+  text-align: center;
+}
+
+.btn-refresh {
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.btn-refresh:hover {
+  color: #333;
+}
+
+/* Overlay pour fermer */
+.notifications-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .notifications-panel {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-height: 70vh;
+    border-radius: 15px 15px 0 0;
+  }
+}
