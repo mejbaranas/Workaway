@@ -1,0 +1,322 @@
+.abonnement-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.abonnement-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* Message */
+.abonnement-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 12px 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.abonnement-message button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #155724;
+}
+
+/* Statut actuel */
+.statut-actuel {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.statut-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.statut-icon {
+  font-size: 18px;
+}
+
+.statut-actuel p {
+  margin: 10px 0;
+  opacity: 0.9;
+}
+
+.btn-annuler {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid white;
+  padding: 8px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.btn-annuler:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Grille des plans */
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+/* Carte plan */
+.plan-card {
+  background-color: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 2px solid transparent;
+}
+
+.plan-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.plan-card.popular {
+  border-color: #667eea;
+}
+
+.plan-card.current {
+  border-color: #28a745;
+}
+
+/* Badge populaire */
+.plan-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Économies */
+.plan-savings {
+  background-color: #28a745;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+/* Nom du plan */
+.plan-name {
+  font-size: 22px;
+  color: #333;
+  margin: 0 0 15px 0;
+  text-align: center;
+}
+
+/* Prix */
+.plan-price {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.price-amount {
+  font-size: 40px;
+  font-weight: bold;
+  color: #333;
+}
+
+.price-duration {
+  font-size: 16px;
+  color: #666;
+}
+
+/* Features */
+.plan-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 25px 0;
+}
+
+.plan-features li {
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #555;
+}
+
+.plan-features li:last-child {
+  border-bottom: none;
+}
+
+.feature-check {
+  color: #28a745;
+  font-weight: bold;
+}
+
+/* Boutons */
+.btn-plan {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-gratuit {
+  background-color: #e9ecef;
+  color: #666;
+  cursor: default;
+}
+
+.btn-current {
+  background-color: #28a745;
+  color: white;
+  cursor: default;
+}
+
+.btn-upgrade {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+}
+
+.btn-upgrade:hover:not(:disabled) {
+  transform: scale(1.02);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-upgrade:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Historique */
+.historique-section {
+  margin-top: 40px;
+}
+
+.historique-section h3 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.historique-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.historique-table th {
+  background-color: #f8f9fa;
+  color: #333;
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.historique-table td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.statut-tag {
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.statut-tag.actif {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.statut-tag.annule {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.statut-tag.en_attente {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.statut-tag.expire {
+  background-color: #e2e3e5;
+  color: #6c757d;
+}
+
+/* Informations de sécurité */
+.securite-info {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.securite-info p {
+  margin: 5px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .plans-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .plan-card {
+    padding: 25px;
+  }
+
+  .price-amount {
+    font-size: 32px;
+  }
+
+  .historique-table {
+    font-size: 14px;
+  }
+
+  .historique-table th,
+  .historique-table td {
+    padding: 10px;
+  }
+}
