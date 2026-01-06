@@ -7,6 +7,22 @@ import "./components/Calendrier.css";
 import FormulaireAvis from "./components/FormulaireAvis";
 import ProfilAvis from "./components/ProfilAvis";
 import "./components/Avis.css";
+import ModifierProfil from "./components/ModifierProfil";
+import "./components/ModifierProfil.css";
+import VerificationIdentite from "./components/VerificationIdentite";
+import "./components/VerificationIdentite.css";
+import GestionUtilisateurs from "./components/GestionUtilisateurs";
+import "./components/GestionUtilisateurs.css";
+import ModerationAnnonces from "./components/ModerationAnnonces";
+import "./components/ModerationAnnonces.css";
+import GestionSignalements from "./components/GestionSignalements";
+import "./components/GestionSignalements.css";
+import NotificationsPanel from "./components/NotificationsPanel";
+import "./components/NotificationsPanel.css";
+import Abonnement from "./components/Abonnement";
+import "./components/Abonnement.css";
+import BadgePremium from "./components/BadgePremium";
+import "./components/BadgePremium.css";
 
 function App() {
   // ID utilisateur temporaire pour test (à remplacer par l'utilisateur connecté)
@@ -23,7 +39,43 @@ function App() {
 
   return (
     <div className="app">
-      <h1>WorkAway</h1>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <h1>WorkAway</h1>
+        <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+          <BadgePremium userId={userId} />
+          <NotificationsPanel userId={userId} />
+        </div>
+      </div>
+      
+      <h2 style={{ marginTop: "30px" }}>👨‍💼 Gestion des utilisateurs (Admin)</h2>
+      <GestionUtilisateurs />
+      
+      <hr style={{ margin: "40px 0" }} />
+      
+      <h2 style={{ marginTop: "30px" }}>📋 Modération des annonces (Admin)</h2>
+      <ModerationAnnonces />
+      
+      <hr style={{ margin: "40px 0" }} />
+      
+      <h2 style={{ marginTop: "30px" }}>🚨 Gestion des signalements (Admin)</h2>
+      <GestionSignalements />
+      
+      <hr style={{ margin: "40px 0" }} />
+      
+      <h2 style={{ marginTop: "30px" }}>💳 Abonnement Premium</h2>
+      <Abonnement userId={userId} />
+      
+      <hr style={{ margin: "40px 0" }} />
+      
+      <h2 style={{ marginTop: "30px" }}>Modifier mon profil</h2>
+      <ModifierProfil userId={userId} />
+      
+      <hr style={{ margin: "40px 0" }} />
+      
+      <h2 style={{ marginTop: "30px" }}>Vérification d'identité</h2>
+      <VerificationIdentite userId={userId} />
+      
+      <hr style={{ margin: "40px 0" }} />
       
       <h2 style={{ marginTop: "30px" }}>US4 - Évaluer un volontaire</h2>
       <FormulaireAvis 
