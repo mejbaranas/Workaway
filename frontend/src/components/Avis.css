@@ -1,53 +1,71 @@
+/* ========================================
+   AVIS - Reviews System
+   ======================================== */
+
+/* ===== FORM AVIS ===== */
+
 .formulaire-avis {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
+  max-width: 520px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8);
 }
 
 .formulaire-avis h3 {
-  margin-bottom: 20px;
-  color: #333;
+  margin: 0 0 var(--space-6) 0;
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-primary);
 }
 
 .avis-error {
-  background-color: #f8d7da;
-  color: #721c24;
-  padding: 10px 15px;
-  border-radius: 4px;
-  margin-bottom: 15px;
+  background: var(--color-error-light);
+  color: var(--color-error);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-5);
+  font-size: var(--text-sm);
+  border: 1px solid var(--color-error);
 }
 
 .avis-success {
-  background-color: #d4edda;
-  color: #155724;
-  padding: 10px 15px;
-  border-radius: 4px;
-  margin-bottom: 15px;
+  background: var(--color-success-light);
+  color: var(--color-success);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-5);
+  font-size: var(--text-sm);
+  border: 1px solid var(--color-success);
 }
 
 .formulaire-avis .form-group {
-  margin-bottom: 15px;
+  margin-bottom: var(--space-6);
 }
 
 .formulaire-avis label {
   display: block;
-  margin-bottom: 8px;
-  font-weight: 500;
-  color: #333;
+  margin-bottom: var(--space-3);
+  font-weight: var(--font-medium);
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
 }
 
 .stars-input {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--color-background);
+  border-radius: var(--radius-lg);
+  width: fit-content;
 }
 
 .star {
   font-size: 28px;
   cursor: pointer;
-  transition: transform 0.1s;
+  transition: transform var(--transition-fast);
+  line-height: 1;
 }
 
 .star:hover {
@@ -55,160 +73,223 @@
 }
 
 .star-filled {
-  color: #f1c40f;
+  color: var(--color-primary);
 }
 
 .star-empty {
-  color: #ddd;
+  color: var(--color-border);
 }
 
 .note-value {
-  margin-left: 10px;
-  font-weight: bold;
-  color: #333;
+  margin-left: var(--space-3);
+  font-weight: var(--font-bold);
+  color: var(--color-text-primary);
+  font-size: var(--text-lg);
 }
 
 .formulaire-avis textarea {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-sm);
+  font-family: var(--font-sans);
   resize: vertical;
+  min-height: 120px;
+  color: var(--color-text-primary);
+  background: var(--color-surface);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  box-sizing: border-box;
 }
 
 .formulaire-avis textarea:focus {
   outline: none;
-  border-color: #3498db;
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-glow);
 }
 
 .btn-submit-avis {
-  background-color: #3498db;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
   width: 100%;
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  border: none;
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  transition: all var(--transition-fast);
 }
 
-.btn-submit-avis:hover {
-  background-color: #2980b9;
+.btn-submit-avis:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 .btn-submit-avis:disabled {
-  background-color: #bdc3c7;
+  background: var(--color-border);
+  color: var(--color-text-muted);
   cursor: not-allowed;
 }
 
-/* Profil Avis */
+/* ===== PROFILE AVIS ===== */
+
 .profil-avis {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
+  max-width: 640px;
 }
 
 .profil-avis h2 {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #333;
+  margin: 0 0 var(--space-6) 0;
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-primary);
 }
 
 .profil-avis-loading,
 .avis-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-12);
   text-align: center;
-  padding: 40px;
-  color: #666;
+  color: var(--color-text-muted);
 }
 
+.profil-avis-loading::before {
+  content: "";
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: var(--radius-full);
+  animation: spin 0.8s linear infinite;
+  margin-bottom: var(--space-4);
+}
+
+/* Stats Summary */
 .avis-stats {
   display: flex;
   align-items: center;
-  gap: 20px;
-  padding: 20px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  gap: var(--space-6);
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  margin-bottom: var(--space-6);
 }
 
 .stats-moyenne {
-  font-size: 36px;
-  font-weight: bold;
-  color: #333;
+  font-size: var(--text-4xl);
+  font-weight: var(--font-bold);
+  color: var(--color-text-primary);
+  line-height: 1;
 }
 
 .moyenne-max {
-  font-size: 18px;
-  color: #666;
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  font-weight: var(--font-normal);
 }
 
 .stats-stars .star-filled,
 .stats-stars .star-empty {
-  font-size: 24px;
+  font-size: var(--text-xl);
+}
+
+.stats-stars .star-filled {
+  color: var(--color-primary);
+}
+
+.stats-stars .star-empty {
+  color: var(--color-border);
 }
 
 .stats-total {
-  color: #666;
-  font-size: 14px;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
 }
 
+/* Avis List */
 .avis-list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: var(--space-4);
 }
 
 .avis-item {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: var(--space-6);
+  border-radius: var(--radius-xl);
+  transition: all var(--transition-fast);
+}
+
+.avis-item:hover {
+  box-shadow: var(--shadow-md);
 }
 
 .avis-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: var(--space-4);
 }
 
 .avis-author {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-3);
 }
 
 .author-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #3498db;
-  color: white;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: var(--color-text-inverse);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
+  font-weight: var(--font-semibold);
+  font-size: var(--text-sm);
+  flex-shrink: 0;
 }
 
 .author-name {
-  font-weight: 500;
-  color: #333;
+  font-weight: var(--font-medium);
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
 }
 
 .avis-note .star-filled,
 .avis-note .star-empty {
-  font-size: 16px;
+  font-size: var(--text-sm);
+}
+
+.avis-note .star-filled {
+  color: var(--color-primary);
+}
+
+.avis-note .star-empty {
+  color: var(--color-border);
 }
 
 .avis-commentaire {
-  color: #555;
-  line-height: 1.5;
-  margin-bottom: 10px;
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-3);
+  font-size: var(--text-sm);
 }
 
 .avis-date {
-  font-size: 12px;
-  color: #999;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
